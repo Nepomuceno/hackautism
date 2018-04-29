@@ -47,14 +47,21 @@ carerProfileForm.x= display.contentCenterX
 carerProfileForm.y = display.contentCenterY + 80
 carerProfileForm.id = "carerProfileForm"
 
+ userProfileForm = display.newImageRect ("images/userProfileForm.png", 200 ,62)
+userProfileForm.x= display.contentCenterX 
+userProfileForm.y = display.contentCenterY + 160
+userProfileForm.id = "userProfileForm"
+
 questionBtn:addEventListener("touch", buttonPress)
 startBtn:addEventListener("touch", buttonPress)
 carerProfileForm:addEventListener("touch", buttonPress)
+userProfileForm:addEventListener("touch", buttonPress)
 
 
 sceneGroup:insert(questionBtn)
 sceneGroup:insert(startBtn)
 sceneGroup:insert(carerProfileForm)
+sceneGroup:insert(userProfileForm)
 
 
 end
