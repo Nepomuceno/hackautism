@@ -409,26 +409,26 @@ monitor = display.newImageRect ("images/monitor.png", buttonSize ,buttonSize)
 monitor.x=buttonSize/2
 monitor.y = display.contentHeight-buttonSize
 
-profile = display.newImageRect ("images/profile.png", buttonSize ,buttonSize)
+--[[profile = display.newImageRect ("images/profile.png", buttonSize ,buttonSize)
 profile.x=buttonSize/2 + buttonSpacer
 profile.y = display.contentHeight-buttonSize
 
 sleep = display.newImageRect ("images/sleepSleep.png", buttonSize ,buttonSize)
 sleep.x=buttonSize/2 + (2*buttonSpacer)
-sleep.y = display.contentHeight-buttonSize
+sleep.y = display.contentHeight-buttonSize--]]
 
 log = display.newImageRect ("images/log.png", buttonSize ,buttonSize)
 log.x=buttonSize/2 + (3*buttonSpacer)
 log.y = display.contentHeight-buttonSize
 
 monitor:addEventListener("touch", showMonitor)
-profile:addEventListener("touch", showProfile)
-sleep:addEventListener("touch", showSleep)
+--profile:addEventListener("touch", showProfile)
+--sleep:addEventListener("touch", showSleep)
 log:addEventListener("touch", showLog)
 
 sceneGroup:insert(monitor)
-sceneGroup:insert(profile)
-sceneGroup:insert(sleep)
+--sceneGroup:insert(profile)
+--sceneGroup:insert(sleep)
 sceneGroup:insert(log)
 
 
