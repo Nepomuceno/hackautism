@@ -156,6 +156,8 @@ end
 
 --sb://autismsleep.servicebus.windows.net/;SharedAccessKeyName=sender;SharedAccessKey=8/zDLu1zjQKTsfE3XH1I01fobJpgJqqQDXOt0hR0pnM=;EntityPath=austismsleep
 
+local function pullData()
+
 local headers = {}
  
 headers["Content-Type"] = "application/json"
@@ -174,7 +176,7 @@ params.body = body
 
 local json_file_by_get = jsonFile( network.request( "http://hackautism.azurewebsites.net/device", "GET", networkListener ) )
 
-
+end
 
 local function clearWindow()
 
@@ -192,6 +194,8 @@ end
 local function  showMonitor(event )
 
  if(event.phase == "began") then
+
+    pullData()
 
   clearWindow()  
  
