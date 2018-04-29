@@ -7,10 +7,19 @@ local scene = composer.newScene()
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
 -- -----------------------------------------------------------------------------------
  
- local questionBtn
- local startBtn
- local carerProfileForm
- 
+local txtTitle
+local txtName
+local inputName
+local txtAge
+local inputAge
+local txtRelationship
+local inputRelationship
+
+local PADDING_TOP = 60
+local PADDING_LEFT = 60
+local TITLE_FONT_SIZE = 32
+local LABEL_FONT_SIZE = 18
+local INPUT_HEIGHT = 24
  
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
@@ -20,43 +29,42 @@ local scene = composer.newScene()
 function scene:create( event )
  
     local sceneGroup = self.view
-
-local function buttonPress (event)
-
-    if(event.phase == "began") then
-
-        composer.gotoScene(event.target.id)
-
-    end
-
- end   
-
     -- Code here runs when the scene is first created but has not yet appeared on screen
- questionBtn = display.newImageRect ("images/questionBtn.png", 200 ,62)
-questionBtn.x= display.contentCenterX
-questionBtn.y = display.contentCenterY - 80
-questionBtn.id="questionnaire"
+    
+    txtTitle = display.newText("CARER INFO",
+        display.contentCenterX, PADDING_TOP,
+        nil, TITLE_FONT_SIZE
+    )
+    
+    txtName = display.newText("Name",
+        display.contentCenterX, PADDING_TOP + TITLE_FONT_SIZE,
+        display.contentWidth - PADDING_LEFT, LABEL_FONT_SIZE
+    )
 
- startBtn = display.newImageRect ("images/startBtn.png", 200 ,62)
-startBtn.x= display.contentCenterX 
-startBtn.y = display.contentCenterY
-startBtn.id = "page1"
+    inputName = native.newTextField(
+        display.contentCenterX, PADDING_TOP + TITLE_FONT_SIZE + INPUT_HEIGHT,
+        display.contentWidth - PADDING_LEFT, INPUT_HEIGHT
+    )
+    
+    txtAge = display.newText("Age",
+        display.contentCenterX, PADDING_TOP + 2 * TITLE_FONT_SIZE + INPUT_HEIGHT,
+        display.contentWidth - PADDING_LEFT, LABEL_FONT_SIZE
+    )
 
- carerProfileForm = display.newImageRect ("images/carerProfileForm.png", 200 ,62)
-carerProfileForm.x= display.contentCenterX 
-carerProfileForm.y = display.contentCenterY + 80
-carerProfileForm.id = "carerProfileForm"
+    inputAge = native.newTextField(
+        display.contentCenterX, PADDING_TOP + 2 * TITLE_FONT_SIZE + 2 * INPUT_HEIGHT,
+        display.contentWidth - PADDING_LEFT, INPUT_HEIGHT
+    )
+    
+    txtRelationship = display.newText("Relationship",
+        display.contentCenterX, PADDING_TOP + 3 * TITLE_FONT_SIZE + 2 * INPUT_HEIGHT,
+        display.contentWidth - PADDING_LEFT, LABEL_FONT_SIZE
+    )
 
-questionBtn:addEventListener("touch", buttonPress)
-startBtn:addEventListener("touch", buttonPress)
-carerProfileForm:addEventListener("touch", buttonPress)
-
-
-sceneGroup:insert(questionBtn)
-sceneGroup:insert(startBtn)
-sceneGroup:insert(carerProfileForm)
-
-
+    inputRelationship = native.newTextField(
+        display.contentCenterX, PADDING_TOP + 3 * TITLE_FONT_SIZE + 3 * INPUT_HEIGHT,
+        display.contentWidth - PADDING_LEFT, INPUT_HEIGHT
+    )
 end
  
  
