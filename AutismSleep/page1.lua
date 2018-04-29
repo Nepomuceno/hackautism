@@ -348,9 +348,54 @@ local function  showLog(event)
 
    clearWindow()
    
-   local logText = display.newText( "log", 100, 100, native.systemFont, 14 )
-   windowGroup:insert(logText)
-   table.insert(windowObjects,logText)
+    -- local logText = display.newText( "log", 100, 100, native.systemFont, 14 )
+    local scrollView = widget.newScrollView({
+        top = 0,
+        left = 0,
+        width = display.contentWidth,
+        height = 400,
+        scrollWidth = display.contentWidth,
+        scrollHeight = 2400
+    })
+ 
+    local imgTemperature = display.newImageRect("images/imgTemperature.jpg",
+        display.contentWidth, 180
+    )
+    imgTemperature.x = 0
+    imgTemperature.y = (0 + 30)
+    imgTemperature.anchorX = 0
+    imgTemperature.anchorY = 0
+ 
+    local imgHumidity = display.newImageRect("images/imgHumidity.jpg",
+        display.contentWidth, 180
+    )
+    imgHumidity.x = 0
+    imgHumidity.y = (180 + 30)
+    imgHumidity.anchorX = 0
+    imgHumidity.anchorY = 0
+ 
+    local imgLight = display.newImageRect("images/imgLight.jpg",
+        display.contentWidth, 180
+    )
+    imgLight.x = 0
+    imgLight.y = 2 * (180 + 30)
+    imgLight.anchorX = 0
+    imgLight.anchorY = 0
+ 
+    local imgPressure = display.newImageRect("images/imgPressure.jpg",
+        display.contentWidth, 180
+    )
+    imgPressure.x = 0
+    imgPressure.y = 3 * (180 + 30)
+    imgPressure.anchorX = 0
+    imgPressure.anchorY = 0
+   
+    scrollView:insert(imgTemperature)
+    scrollView:insert(imgHumidity)
+    scrollView:insert(imgLight)
+    scrollView:insert(imgPressure)
+   windowGroup:insert(scrollView)
+   table.insert(windowObjects,scrollView)
 
  end
 end

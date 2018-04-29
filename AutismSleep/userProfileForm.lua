@@ -96,6 +96,84 @@ function scene:create( event )
         width = display.contentWidth - PADDING_LEFT,
         orientation = "horizontal"
     })
+
+    txtCommunication = display.newText("Communication",
+        display.contentCenterX, PADDING_TOP + 6 * TITLE_FONT_SIZE + 5 * INPUT_HEIGHT,
+        display.contentWidth - PADDING_LEFT, LABEL_FONT_SIZE
+    )
+
+    sliderCommunication = widget.newSlider({
+        id = "Communication",
+        x = display.contentCenterX,
+        y = PADDING_TOP + 6 * TITLE_FONT_SIZE + 6 * INPUT_HEIGHT,
+        width = display.contentWidth - PADDING_LEFT,
+        orientation = "horizontal"
+    })
+
+    txtPropioceptive = display.newText("Propioceptive",
+        display.contentCenterX, PADDING_TOP + 7 * TITLE_FONT_SIZE + 6 * INPUT_HEIGHT,
+        display.contentWidth - PADDING_LEFT, LABEL_FONT_SIZE
+    )
+
+    sliderPropioceptive = widget.newSlider({
+        id = "Propioceptive",
+        x = display.contentCenterX,
+        y = PADDING_TOP + 7 * TITLE_FONT_SIZE + 7 * INPUT_HEIGHT,
+        width = display.contentWidth - PADDING_LEFT,
+        orientation = "horizontal"
+    })
+
+    txtSound = display.newText("Sound",
+        display.contentCenterX, PADDING_TOP + 8 * TITLE_FONT_SIZE + 7 * INPUT_HEIGHT,
+        display.contentWidth - PADDING_LEFT, LABEL_FONT_SIZE
+    )
+
+    sliderSound = widget.newSlider({
+        id = "Sound",
+        x = display.contentCenterX,
+        y = PADDING_TOP + 8 * TITLE_FONT_SIZE + 8 * INPUT_HEIGHT,
+        width = display.contentWidth - PADDING_LEFT,
+        orientation = "horizontal"
+    })
+
+    txtTemperature = display.newText("Temperature",
+        display.contentCenterX, PADDING_TOP + 9 * TITLE_FONT_SIZE + 8 * INPUT_HEIGHT,
+        display.contentWidth - PADDING_LEFT, LABEL_FONT_SIZE
+    )
+
+    sliderTemperature = widget.newSlider({
+        id = "Temperature",
+        x = display.contentCenterX,
+        y = PADDING_TOP + 9 * TITLE_FONT_SIZE + 9 * INPUT_HEIGHT,
+        width = display.contentWidth - PADDING_LEFT,
+        orientation = "horizontal"
+    })
+
+    txtCommunication = display.newText("Communication",
+        display.contentCenterX, PADDING_TOP + 10 * TITLE_FONT_SIZE + 9 * INPUT_HEIGHT,
+        display.contentWidth - PADDING_LEFT, LABEL_FONT_SIZE
+    )
+
+    sliderCommunication = widget.newSlider({
+        id = "Communication",
+        x = display.contentCenterX,
+        y = PADDING_TOP + 10 * TITLE_FONT_SIZE + 10 * INPUT_HEIGHT,
+        width = display.contentWidth - PADDING_LEFT,
+        orientation = "horizontal"
+    })
+
+    txtScent = display.newText("Scent",
+        display.contentCenterX, PADDING_TOP + 11 * TITLE_FONT_SIZE + 10 * INPUT_HEIGHT,
+        display.contentWidth - PADDING_LEFT, LABEL_FONT_SIZE
+    )
+
+    sliderScent = widget.newSlider({
+        id = "Scent",
+        x = display.contentCenterX,
+        y = PADDING_TOP + 10 * TITLE_FONT_SIZE + 10 * INPUT_HEIGHT,
+        width = display.contentWidth - PADDING_LEFT,
+        orientation = "horizontal"
+    })
 end
  
  
