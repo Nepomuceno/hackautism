@@ -69,7 +69,7 @@ function scene:create( event )
 { 
     { 
         align = "left",
-        width = 124,
+        width = display.contentWidth,
         labelPadding = 20,
         startIndex = 2,
         labels = { "Rarely", "Sometimes", "Usually" }
