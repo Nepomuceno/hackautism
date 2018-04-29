@@ -148,6 +148,16 @@ pickerWheel = widget.newPickerWheel(
 
 end
 
+local function buttonPress (event)
+
+    if(event.phase == "began") then
+
+        composer.gotoScene(event.target.id)
+
+    end
+
+ end 
+
 local function questionsOver()
 
        questionText:removeSelf()
@@ -157,12 +167,15 @@ local function questionsOver()
     
         questionText = display.newText( "Questions Complete", display.contentCenterX, 200, 300, 200, native.systemFont, 18 )
         
-        homeBtn = display.newImageRect ("images/nextBtn.png", 50 ,50)
+        local homeBtn = display.newImageRect ("images/nextBtn.png", 50 ,50)
 homeBtn.x= display.contentCenterX
 homeBtn.y = display.contentHeight-80
-homeBtn.id = "home"
+homeBtn.id = "mainMenu"
 
-homeBtn:addEventListener("touch", home)
+sceneGroup:insert(homeBtn)
+sceneGroup:insert(questionText)
+
+homeBtn:addEventListener("touch", buttonPress)
 
 
 end    
@@ -249,6 +262,8 @@ local function  nextQuestion( event )
     else
 
         sendData()
+
+        questionsOver()
 
     end
 
