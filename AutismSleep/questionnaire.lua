@@ -31,6 +31,22 @@ function scene:create( event )
         labelPadding = 20,
         startIndex = 2,
         labels = { "1", "2", "3","4","5","6","7","8","9","10","11","12"}
+    },
+
+    { 
+        align = "left",
+        width = 124,
+        labelPadding = 20,
+        startIndex = 2,
+        labels = { "00", "10", "20","30","40","50"}
+    },
+
+    { 
+        align = "left",
+        width = 124,
+        labelPadding = 20,
+        startIndex = 2,
+        labels = { "am", "pm"}
     }
 
 }
