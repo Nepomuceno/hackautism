@@ -1,9 +1,5 @@
 local questionnaireAnswers = {}
 
-questionnaireAnswers = {
-	
-	
-
-}
+questionnaireAnswers = {}
 
 return questionnaireAnswers

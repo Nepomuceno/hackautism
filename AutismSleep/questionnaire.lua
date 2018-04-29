@@ -1,6 +1,8 @@
 local composer = require( "composer" )
 local widget = require( "widget" )
 local questionSet = require "questionSet"
+local json = require ("json")
+--local questionnaireAnswers = require "questionnaireAnswers"
  
 local scene = composer.newScene()
  
@@ -11,6 +13,7 @@ local scene = composer.newScene()
  local questionText
  local questionCounter = 1
  local pickerWheel
+ local questionnaireAnswers = {}
  
  
  
@@ -23,6 +26,31 @@ function scene:create( event )
  
     local sceneGroup = self.view
     -- Code here runs when the scene is first created but has not yet appeared on screen
+local jsonFile = function( filename, base )
+
+-- set default base dir if none specified
+if not base then base = system.ResourceDirectory; end
+
+-- create a file path for corona i/o
+local path = system.pathForFile( filename, base )
+
+-- will hold contents of file
+local contents
+
+-- io.open opens a file at path. returns nil if no file found
+local file = io.open( path, "r" )
+if file then
+-- read all contents of file into a string
+contents = file:read( "*a" )
+io.close( file ) -- close the file after using it
+end
+
+return contents
+end
+
+
+
+
 
  local time = 
 { 
@@ -110,24 +138,90 @@ pickerWheel = widget.newPickerWheel(
 
 end
 
+local function sendData()
+
+    local headers = {}
+ 
+headers["Content-Type"] = "application/atom+xml;type=entry;charset=utf-8"
+headers["Authorization"] = "SharedAccessSignature sr=https%3a%2f%2fhackautism.servicebus.windows.net%2f&sig=V4MAr%2fdfgq4CNhP9wNkvKirDiAItM0M0FxPGFpNsr5A%3d&se=1525536107&skn=sender"
+
+local t = {
+    ["answers"] = {questionnaireAnswers},
+
+}
+
+
+
+local body = json.encode(t)
+
+
+
+local params = {}
+params.headers = headers
+params.body = body
+ 
+network.request( "https://hackautism.servicebus.windows.net/devicedata/messages?api-version=2014-01", "POST", networkListener, params )
+
+--local json_file_by_get = jsonFile( network.request( "https://my-json-server.typicode.com/caffebd/testjson/sensors", "GET", networkListener ) )
+
+print ('send done')
+
+end
+
  
 local function getValueFromWheel()
  local values = pickerWheel:getValues()
  local currentStyle = values[1].value
 end
 
+local function getAnswer()
+
+    local values = pickerWheel:getValues()
+    local myAnswer
+
+        if (questionSet.picker[questionCounter]=="time") then
+
+            print (values[1].value)
+
+         myAnswer = values[1].value..":"..values[2].value..""..values[3].value
+
+        end   
+
+--print (myAnswer)
+
+table.insert (questionnaireAnswers, myAnswer)
+         
+
+end    
+
 local function  nextQuestion( event )
 
     if(event.phase == "began") then
 
-        questionCounter = questionCounter + 1
+        getAnswer()
+
+        --table.insert (questionnaireAnswers, )
+
+        print ("set"..#questionSet.question)
+        print ("counter"..questionCounter)
+
+        if (questionCounter<#questionSet.question) then
+
+      questionCounter = questionCounter + 1
 
         questionText:removeSelf()
         pickerWheel:removeSelf()
-
     
         questionText = display.newText( questionSet.question[questionCounter], display.contentCenterX, 200, 300, 200, native.systemFont, 18 )
         makeWheel(questionSet.picker[questionCounter])
+        
+        --sendData()
+
+    else
+
+        sendData()
+
+    end
 
     end
 end
