@@ -3,6 +3,7 @@ local json = require ("json")
 local widget = require( "widget" )
 local tableData = require "tableData"
 local receivedData = require "receivedData"
+local thresholds = require "thresholds"
  
 local scene = composer.newScene()
  
@@ -210,8 +211,24 @@ local function  showMonitor(event )
         local level = "low" --tableData.content[row.index].level
 
         local myRowColor = { 0, 0, 0}
+print(row.id)
+        if (
+            (type(thresholds.values[row.id]) == "string" and
+            tableData.content[row.id].value == thresholds.values[row.id]) or
+            tableData.content[row.id].value < thresholds.values[row.id]) then
+            
+            row:setRowColor( { default = {0.59, 0.98, 0.59}, over = {0.59, 0.98, 0.59}} )
 
-        if (level == "low") then
+
+
+        else
+
+             row:setRowColor( { default = {0.8, 0.07, 0.23}, over = {0.8, 0.07, 0.23}} )
+
+
+        end
+
+--[[        if (level == "low") then
 
            print (level)
 
@@ -231,7 +248,7 @@ local function  showMonitor(event )
               row:setRowColor( { default = {0.8, 0.07, 0.23}, over = {0.8, 0.07, 0.23}} )
 
 
-            end
+            end--]]
  
     -- Cache the row "contentWidth" and "contentHeight" because the row bounds can change as children objects are added
     local rowHeight = row.contentHeight
@@ -435,7 +452,7 @@ sceneGroup:insert(monitor)
 --sceneGroup:insert(sleep)
 sceneGroup:insert(log)
 
-
+pullData()
 
 end
  
