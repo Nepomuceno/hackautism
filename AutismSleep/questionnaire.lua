@@ -10,6 +10,7 @@ local scene = composer.newScene()
 -- -----------------------------------------------------------------------------------
  local questionText
  local questionCounter = 1
+ local pickerWheel
  
  
  
@@ -88,11 +89,15 @@ if (wheelType=="frequency") then
 
         myPickerType = isProblem
 
+    elseif (wheelType=="time") then
+
+        myPickerType = time
     end
 print (wheelType)
 
+
 -- Create the widget
-local pickerWheel = widget.newPickerWheel(
+pickerWheel = widget.newPickerWheel(
 {
     x = display.contentCenterX,
     top = display.contentHeight - 160,
@@ -118,6 +123,8 @@ local function  nextQuestion( event )
         questionCounter = questionCounter + 1
 
         questionText:removeSelf()
+        pickerWheel:removeSelf()
+
     
         questionText = display.newText( questionSet.question[questionCounter], display.contentCenterX, 200, 300, 200, native.systemFont, 18 )
         makeWheel(questionSet.picker[questionCounter])
