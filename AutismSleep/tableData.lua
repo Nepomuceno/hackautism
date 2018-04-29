@@ -11,7 +11,7 @@ tableData.content = {
  { text="Red", icon="lightIcon.png", value=5, level="n" },
  { text="Green", icon="lightIcon.png", value=5, level="n" },
  { text="Blue", icon="lightIcon.png", value=5, level="n" },
- { text="Noise", icon="soundIcon.png", value = 6, level ="n" }
+ { text="Noise", icon="soundIcon.png", value = "n", level ="n" }
 
 }
 

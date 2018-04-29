@@ -90,17 +90,47 @@ local function networkListener( event )
         print ( "RESPONSE: " .. event.response )
         myDataTable = json.decode(event.response)
 
-         receivedData.temp[1] = myDataTable["temp"]
-         tableData.content[1].value = receivedData.light[1]
+        print(myDataTable["environment"]["temp"])
 
-         receivedData.pressure[1] = myDataTable["pressure"]
+         receivedData.temp[1] = myDataTable["environment"]["temp"]
+         tableData.content[1].value = receivedData.temp[1]
+
+         receivedData.pressure[1] = myDataTable["environment"]["pressure"]
          tableData.content[2].value = receivedData.pressure[1]
 
-         receivedData.altitude[1] = myDataTable["altitude"]
+         receivedData.altitude[1] = myDataTable["environment"]["altitude"]
          tableData.content[3].value = receivedData.altitude[1]
 
-         receivedData.humidity[1] = myDataTable["pressure"]
-         tableData.content[2].value = receivedData.pressure[1]
+         receivedData.humidity[1] = myDataTable["environment"]["humidity"]
+         tableData.content[4].value = receivedData.humidity[1]
+
+         receivedData.light[1] = myDataTable["environment"]["light"]
+         tableData.content[5].value = receivedData.light[1]
+
+         receivedData.red[1] = myDataTable["environment"]["red"]
+         tableData.content[6].value = receivedData.red[1]
+
+         receivedData.green[1] = myDataTable["environment"]["green"]
+         tableData.content[7].value = receivedData.green[1]
+
+         receivedData.blue[1] = myDataTable["environment"]["blue"]
+         tableData.content[8].value = receivedData.blue[1]
+
+
+         receivedData.noise[1] = myDataTable["environment"]["noise"]
+
+         if (receivedData.noise[1]==false) then
+
+            tableData.content[9].value = "Quiet"
+
+         else
+
+            tableData.content[9].value = "Noisy"
+         end
+
+         
+
+
 
 
          --tableData.content[1].level = receivedData.light[2]
@@ -207,14 +237,25 @@ local function  showMonitor(event )
  
     --local rowIcon = display.newImageRect ("images/"..tableData.content[row.index].icon, 25,25)
     local rowTitle = display.newText( row, tableData.content[row.index].text, 0, 0, nil, 14 )
-    --local rowValue = display.newText( row, tableData.content[row.index].value, 0, 0, nil, 14 )
+    local rowValue = display.newText( row, tableData.content[row.index].value, 0, 0, nil, 14 )
 
 
-    row:insert(rowIcon)
+    --row:insert(rowIcon)
     row:insert(rowTitle)
     row:insert(rowValue)
 
     rowTitle:setFillColor( 0 )
+    rowValue:setFillColor( 0 )
+
+        rowTitle.anchorX = 0
+    rowTitle.x = 40
+    rowTitle.y = rowHeight * 0.5
+
+    rowValue.anchorX = 0
+    rowValue.x = 180
+    rowValue.y = rowHeight * 0.5
+
+ --[[   
     rowValue:setFillColor( 0 )
  
     -- Align the label left and vertically centered
@@ -228,7 +269,7 @@ local function  showMonitor(event )
 
     rowIcon.anchorX = 0
     rowIcon.x = 10
-    rowIcon.y = rowHeight *0.5
+    rowIcon.y = rowHeight *0.5--]]
 
 
     --end
