@@ -90,24 +90,36 @@ local function networkListener( event )
         print ( "RESPONSE: " .. event.response )
         myDataTable = json.decode(event.response)
 
-         receivedData.light[1] = myDataTable[1]["light"][1]
-         receivedData.light[2] = myDataTable[1]["light"][2]
+         receivedData.temp[1] = myDataTable["temp"]
          tableData.content[1].value = receivedData.light[1]
-         tableData.content[1].level = receivedData.light[2]
 
-         receivedData.sound[1] = myDataTable[1]["sound"][1]
-         receivedData.sound[2] = myDataTable[1]["sound"][2]
+         receivedData.pressure[1] = myDataTable["pressure"]
+         tableData.content[2].value = receivedData.pressure[1]
 
-         tableData.content[2].value = receivedData.sound[1]
-         tableData.content[2].level = receivedData.sound[2]
+         receivedData.altitude[1] = myDataTable["altitude"]
+         tableData.content[3].value = receivedData.altitude[1]
 
-         receivedData.isSleeping = myDataTable[1]["isSleeping"]
-         tableData.isSleeping = receivedData.isSleeping
-
-         print (tableData.isSleeping)
+         receivedData.humidity[1] = myDataTable["pressure"]
+         tableData.content[2].value = receivedData.pressure[1]
 
 
-       checkIfSleeping()
+         --tableData.content[1].level = receivedData.light[2]
+
+         --receivedData.sound[1] = myDataTable[1]["sound"][1]
+         --receivedData.sound[2] = myDataTable[1]["sound"][2]
+
+         --tableData.content[2].value = receivedData.sound[1]
+         --tableData.content[2].level = receivedData.sound[2]
+
+         --receivedData.isSleeping = myDataTable[1]["isSleeping"]
+         --tableData.isSleeping = receivedData.isSleeping
+
+         --print (tableData.isSleeping)
+
+         print (receivedData.light[1])
+
+
+       --checkIfSleeping()
 
     end
 end
@@ -116,8 +128,8 @@ end
 
 local headers = {}
  
-headers["Content-Type"] = "application/atom+xml;type=entry;charset=utf-8"
-headers["Authorization"] = "SharedAccessSignature sr=https%3a%2f%2fhackautism.servicebus.windows.net%2f&sig=V4MAr%2fdfgq4CNhP9wNkvKirDiAItM0M0FxPGFpNsr5A%3d&se=1525536107&skn=sender"
+headers["Content-Type"] = "application/json"
+--headers["Authorization"] = "SharedAccessSignature sr=https%3a%2f%2fhackautism.servicebus.windows.net%2f&sig=V4MAr%2fdfgq4CNhP9wNkvKirDiAItM0M0FxPGFpNsr5A%3d&se=1525536107&skn=sender"
 
 
 local body = "If this works, I'm going home"
@@ -128,7 +140,11 @@ params.body = body
  
 --network.request( "https://hackautism.servicebus.windows.net/devicedata/messages?api-version=2014-01", "POST", networkListener, params )
 
-local json_file_by_get = jsonFile( network.request( "https://my-json-server.typicode.com/caffebd/testjson/sensors", "GET", networkListener ) )
+--local json_file_by_get = jsonFile( network.request( "https://my-json-server.typicode.com/caffebd/testjson/sensors", "GET", networkListener ) )
+
+local json_file_by_get = jsonFile( network.request( "http://hackautism.azurewebsites.net/device", "GET", networkListener ) )
+
+
 
 local function clearWindow()
 
@@ -157,7 +173,7 @@ local function  showMonitor(event )
     -- Get reference to the row group
     local row = event.row
 
-        local level = tableData.content[row.index].level
+        local level = "low" --tableData.content[row.index].level
 
         local myRowColor = { 0, 0, 0}
 
@@ -189,9 +205,9 @@ local function  showMonitor(event )
 
   --  if (row.index <= #tableData.content) then 
  
-    local rowIcon = display.newImageRect ("images/"..tableData.content[row.index].icon, 25,25)
+    --local rowIcon = display.newImageRect ("images/"..tableData.content[row.index].icon, 25,25)
     local rowTitle = display.newText( row, tableData.content[row.index].text, 0, 0, nil, 14 )
-    local rowValue = display.newText( row, tableData.content[row.index].value, 0, 0, nil, 14 )
+    --local rowValue = display.newText( row, tableData.content[row.index].value, 0, 0, nil, 14 )
 
 
     row:insert(rowIcon)

@@ -48,7 +48,17 @@ end
 return contents
 end
 
+local function networkListener( event )
 
+    if ( event.isError ) then
+        print( "Network error: ", event.response )
+    else
+        print ( "RESPONSE: " .. event.response )
+        myDataTable = json.decode(event.response)
+
+    end
+
+ end   
 
 
 
@@ -138,12 +148,18 @@ pickerWheel = widget.newPickerWheel(
 
 end
 
+local function questionsOver()
+
+
+
+end    
+
 local function sendData()
 
     local headers = {}
  
-headers["Content-Type"] = "application/atom+xml;type=entry;charset=utf-8"
-headers["Authorization"] = "SharedAccessSignature sr=https%3a%2f%2fhackautism.servicebus.windows.net%2f&sig=V4MAr%2fdfgq4CNhP9wNkvKirDiAItM0M0FxPGFpNsr5A%3d&se=1525536107&skn=sender"
+headers["Content-Type"] = "application/json"
+--headers["Authorization"] = "SharedAccessSignature sr=https%3a%2f%2fhackautism.servicebus.windows.net%2f&sig=V4MAr%2fdfgq4CNhP9wNkvKirDiAItM0M0FxPGFpNsr5A%3d&se=1525536107&skn=sender"
 
 local t = {
     ["answers"] = {questionnaireAnswers},
@@ -154,13 +170,13 @@ local t = {
 
 local body = json.encode(t)
 
-
+print(body);
 
 local params = {}
 params.headers = headers
 params.body = body
  
-network.request( "https://hackautism.servicebus.windows.net/devicedata/messages?api-version=2014-01", "POST", networkListener, params )
+network.request( "http://hackautism.azurewebsites.net/device", "POST", networkListener, params )
 
 --local json_file_by_get = jsonFile( network.request( "https://my-json-server.typicode.com/caffebd/testjson/sensors", "GET", networkListener ) )
 
@@ -215,7 +231,7 @@ local function  nextQuestion( event )
         questionText = display.newText( questionSet.question[questionCounter], display.contentCenterX, 200, 300, 200, native.systemFont, 18 )
         makeWheel(questionSet.picker[questionCounter])
         
-        --sendData()
+        sendData()
 
     else
 
